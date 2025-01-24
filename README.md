@@ -1,2 +1,20 @@
 # amp2pfp
 repo to serialize amp-entity-data into pfp-cidoc rdf
+
+This repo fetches data from the [amp-entities repo](https://github.com/Auden-Musulin-Papers/amp-entities) and converts it into a CIDOC CRM RDF Graph (hopefully) validating against the (in)famous [PFP-Shacl](https://pfp-schema.acdh-ch-dev.oeaw.ac.at/shacl/shacl.ttl).
+
+
+## develop
+
+```bash
+git clone https://github.com/Auden-Musulin-Papers/amp2pfp.git
+cd amp2pfp
+[python -m venv venv]
+[source venv/bin/activate]
+pip install -r requirements.txt
+```
+
+## build and validate the graph
+```bash
+./scripts/build_amp_graph.sh
+```
