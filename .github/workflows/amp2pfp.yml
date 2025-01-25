@@ -5,7 +5,7 @@ on:
 
 jobs:
   download:
-    name: dump baserow
+    name: serialize AMP to PFP-CIDOC
     runs-on: ubuntu-latest
     env:
       OWNCLOUD_USER: ${{ secrets.OWNCLOUD_USER }}
