@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       OWNCLOUD_USER: ${{ secrets.OWNCLOUD_USER }}
-      OWNCLOUD_PASSWORD: ${{ secrets.OWNCLOUD_PASSWORD }}
+      OWNCLOUD_PW: ${{ secrets.OWNCLOUD_PW }}
     steps:
       - name: Perfom Checkout
         uses: actions/checkout@v4
