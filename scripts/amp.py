@@ -2,6 +2,11 @@ import glob
 import os
 from rdflib import Graph
 
+from utils import upload_files_to_owncloud
+
+user = os.environ["OWNCLOUD_USER"]
+pw = os.environ["OWNCLOUD_PW"]
+
 prefix = "amp"
 type_file = os.path.join("scripts", "types.ttl")
 
@@ -19,3 +24,7 @@ else:
     g.parse(type_file)
     print(f"serializing graph to {out_file}")
     g.serialize(out_file)
+
+files = glob.glob("./datasets/*.ttl")
+upload = upload_files_to_owncloud(files, user, pw, folder="pfp-data")
+print(upload)

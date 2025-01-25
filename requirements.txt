@@ -1,2 +1,3 @@
 acdh-cidoc-pyutils==1.2
 pyshacl
+pyocclient

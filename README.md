@@ -9,15 +9,21 @@ If you don't know what PFP stands for: [PFP](https://www.oeaw.ac.at/acdh/researc
 
 ## develop
 
+
 ```bash
 git clone https://github.com/Auden-Musulin-Papers/amp2pfp.git
 cd amp2pfp
 [python -m venv venv]
 [source venv/bin/activate]
 pip install -r requirements.txt
+cp .env .secret [and add your ownloud credentials]
 ```
+
+
 
 ## build and validate the graph
 ```bash
 ./scripts/build_amp_graph.sh
 ```
+
+the graph is uploaded to [owncloud](https://cloud.oeaw.ac.at/index.php/s/NTjXBotgP988rbB)

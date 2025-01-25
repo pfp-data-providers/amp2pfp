@@ -7,6 +7,9 @@ jobs:
   download:
     name: dump baserow
     runs-on: ubuntu-latest
+    env:
+      OWNCLOUD_USER: ${{ secrets.OWNCLOUD_USER }}
+      OWNCLOUD_PASSWORD: ${{ secrets.OWNCLOUD_PASSWORD }}
     steps:
       - name: Perfom Checkout
         uses: actions/checkout@v4
@@ -15,7 +18,3 @@ jobs:
           pip install -r requirements.txt
       - name: dump the data
         run: ./scripts/build_amp_graph.sh
-      - name: Commit data
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: AMP entity data PFP-CIDOC serialization
