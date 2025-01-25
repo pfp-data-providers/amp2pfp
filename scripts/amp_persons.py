@@ -30,7 +30,7 @@ else:
 rdf_dir = "./datasets"
 os.makedirs(rdf_dir, exist_ok=True)
 
-index_file = "./listperson.xml"
+index_file = "./amp-listperson.xml"
 entity_type = "person"
 
 print("check if source file exists")
