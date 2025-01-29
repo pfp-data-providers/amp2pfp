@@ -117,6 +117,9 @@ for x in tqdm(items, total=len(items)):
 
     # occupations
     g += make_occupations(subj, x, id_xpath="./@key")[0]
+    g.add(
+        (URIRef("https://upsi-daysi"), RDF.type, CIDOC["E21_Person"])
+    )
 
 save_path = os.path.join(rdf_dir, f"amp_{entity_type}.nt")
 print(f"saving graph as {save_path}")
