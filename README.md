@@ -1,3 +1,4 @@
+[![Serialize AMP to PFP-CIDOC](https://github.com/Auden-Musulin-Papers/amp2pfp/actions/workflows/amp2pfp.yml/badge.svg)](https://github.com/Auden-Musulin-Papers/amp2pfp/actions/workflows/amp2pfp.yml)
 # amp2pfp
 repo to serialize amp-entity-data into pfp-cidoc rdf
 
