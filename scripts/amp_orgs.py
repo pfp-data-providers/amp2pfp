@@ -2,7 +2,6 @@ import os
 import requests
 from tqdm import tqdm
 from acdh_cidoc_pyutils import (
-    create_e52,
     make_e42_identifiers,
     make_appellations,
     p95i_was_formed_by,
@@ -36,7 +35,7 @@ print("check if source file exists")
 if os.path.exists(index_file):
     pass
 else:
-    url = "https://raw.githubusercontent.com/Auden-Musulin-Papers/amp-entities/refs/heads/14-organisation-founded_in_year---better-tei-serialisation/out/amp-index-organizations.xml"
+    url = "https://raw.githubusercontent.com/Auden-Musulin-Papers/amp-entities/refs/heads/main/out/amp-index-organizations.xml"  # noqa: E501
     print(f"fetching {index_file} from {url}")
     response = requests.get(url)
     with open(index_file, "wb") as file:
@@ -83,6 +82,6 @@ for x in tqdm(items, total=len(items)):
             subj, start_date=y, label=f"{label[0]} wurde gegründet", label_lang=label[1]
         )
 
-save_path = os.path.join(rdf_dir, f"amp_{entity_type}.ttl")
+save_path = os.path.join(rdf_dir, f"amp_{entity_type}.nt")
 print(f"saving graph as {save_path}")
-g.serialize(save_path)
+g.serialize(save_path, format="nt", encoding="utf-8")

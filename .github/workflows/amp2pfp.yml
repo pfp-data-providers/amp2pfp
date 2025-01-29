@@ -17,4 +17,12 @@ jobs:
         run: |
           pip install -r requirements.txt
       - name: dump the data
-        run: ./scripts/build_amp_graph.sh
+        run: ./scripts/build_graph.sh
+      - name: validate
+        run: ./scripts/validate.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: validation_report.txt
+          path: datasets/validation_report.txt
+      - name: upload to ownCloud
+        run: python scripts/upload.py
