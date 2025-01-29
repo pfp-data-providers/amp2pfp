@@ -12,7 +12,7 @@ jobs:
       OWNCLOUD_PW: ${{ secrets.OWNCLOUD_PW }}
       OWNCLOUD_FOLDER: pfp-data
     steps:
-      - name: Perfom Checkout
+      - name: Perform Checkout
         uses: actions/checkout@v4
       - name: Install Python Packages
         run: |
@@ -21,9 +21,9 @@ jobs:
         run: ./scripts/build_graph.sh
       - name: validate
         run: ./scripts/validate.sh
-      - uses: actions/upload-artifact@v4
+      - name: upload artifact if validate fails
+        if: failure()
+        uses: actions/upload-artifact@v4
         with:
-          name: validation_report.txt
+          name: validation_report
           path: datasets/validation_report.txt
-      - name: upload to ownCloud
-        run: python scripts/upload.py

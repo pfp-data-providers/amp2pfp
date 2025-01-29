@@ -4,7 +4,6 @@ DATA_DIR=datasets
 RDF_FILE=amp.nt
 REPORT=${DATA_DIR}/validation_report.txt
 
-
 SHACL=${DATA_DIR}/myshapes.ttl
 rm ${SHACL}
 echo "downloading latest SHACL shapes"
@@ -18,6 +17,9 @@ VIOLATIONS=$(grep -o "sh:Violation" ${REPORT} | wc -l)
 
 if [ ${VIOLATIONS} -eq 0 ]; then
     echo "Whohooo!!! No Violations. Great Job!!!!"
+    echo "uploading ${RDF_FILE} to owncloud now"
+    python scripts/upload.py
 else
     echo "Upsi dupsi, there are ${VIOLATIONS} violations. hush hush, go and fix them!"
+    exit 1
 fi
