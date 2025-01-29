@@ -92,6 +92,6 @@ for x in tqdm(items, total=len(items)):
     g += p89_falls_within(subj, x, f"{PU}")
 
 
-save_path = os.path.join(rdf_dir, f"amp_{entity_type}.ttl")
+save_path = os.path.join(rdf_dir, f"amp_{entity_type}.nt")
 print(f"saving graph as {save_path}")
-g.serialize(save_path)
+g.serialize(save_path, format="nt", encoding="utf-8")

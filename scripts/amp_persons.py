@@ -82,42 +82,42 @@ for x in tqdm(items, total=len(items)):
     )
 
     # birth
-    event_graph, birth_uri, birth_timestamp = make_birth_death_entities(
-        subj,
-        x,
-        f"{PU}place__",
-        event_type="birth",
-        verbose=True,
-        default_prefix="Geburt von",
-        date_node_xpath="/tei:date[1]",
-        place_id_xpath="//tei:settlement[1]/@key",
-    )
     try:
+        x.xpath(".//tei:birth[./tei:date or ./tei:settlement]", namespaces=NSMAP)[0]
+        event_graph, birth_uri, birth_timestamp = make_birth_death_entities(
+            subj,
+            x,
+            f"{PU}",
+            event_type="birth",
+            default_prefix="Geburt von",
+            date_node_xpath="/tei:date[1]",
+            place_id_xpath="//tei:settlement[1]/@key",
+        )
         g.add((subj, CIDOC["P98i_was_born"], birth_uri))
-    except AssertionError:
+        g += event_graph
+    except IndexError:
         pass
-    g += event_graph
 
     # death
-    event_graph, death_uri, birth_timestamp = make_birth_death_entities(
-        subj,
-        x,
-        f"{PU}place__",
-        event_type="death",
-        verbose=True,
-        default_prefix="Tod von",
-        date_node_xpath="/tei:date[1]",
-        place_id_xpath="//tei:settlement[1]/@key",
-    )
     try:
+        x.xpath(".//tei:death[./tei:date or ./tei:settlement]", namespaces=NSMAP)[0]
+        event_graph, death_uri, birth_timestamp = make_birth_death_entities(
+            subj,
+            x,
+            f"{PU}",
+            event_type="death",
+            default_prefix="Tod von",
+            date_node_xpath="/tei:date[1]",
+            place_id_xpath="//tei:settlement[1]/@key",
+        )
         g.add((subj, CIDOC["P100i_died_in"], death_uri))
-    except AssertionError:
+        g += event_graph
+    except IndexError:
         pass
-    g += event_graph
 
     # occupations
     g += make_occupations(subj, x, id_xpath="./@key")[0]
 
-save_path = os.path.join(rdf_dir, f"amp_{entity_type}.ttl")
+save_path = os.path.join(rdf_dir, f"amp_{entity_type}.nt")
 print(f"saving graph as {save_path}")
-g.serialize(save_path)
+g.serialize(save_path, format="nt", encoding="utf-8")
