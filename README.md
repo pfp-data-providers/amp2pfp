@@ -27,4 +27,4 @@ cp .env .secret [and add your ownloud credentials]
 ./scripts/build_amp_graph.sh
 ```
 
-the graph is uploaded to [owncloud](https://cloud.oeaw.ac.at/index.php/s/NTjXBotgP988rbB)
+the graph is uploaded to [owncloud](https://cloud.oeaw.ac.at/index.php/s/K58kj4kGyGCYmai)
