@@ -6,9 +6,10 @@ RDF_FILE=${DATA_DIR}/amp.nt
 export NO_LIMIT=1
 start_time=$(date +%s)
 
-python scripts/amp_orgs.py
-python scripts/amp_places.py
-python scripts/amp_persons.py
+python scripts/orgs.py
+python scripts/places.py
+python scripts/persons.py
+python scripts/bibls.py
 python scripts/amp.py
 
 end_time=$(date +%s)
