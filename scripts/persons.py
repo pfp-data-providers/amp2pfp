@@ -8,6 +8,7 @@ from acdh_cidoc_pyutils import (
     make_affiliations,
     make_entity_label,
     make_occupations,
+    tei_relation_to_SRPC3_in_social_relation
 )
 from acdh_xml_pyutils.xml import NSMAP
 from acdh_cidoc_pyutils.namespaces import CIDOC
@@ -117,6 +118,22 @@ for x in tqdm(items, total=len(items)):
 
     # occupations
     g += make_occupations(subj, x, id_xpath="./@key")[0]
+
+print("now serializing person-person-relations")
+lookup_dict = requests.get(
+    "https://acdh-oeaw.github.io/pfp-schema/mappings/person-person.json"
+).json()
+g.parse("https://acdh-oeaw.github.io/pfp-schema/types/person-person/person-person.ttl")
+
+person_person_rel_types = set()
+for x in doc.any_xpath(".//tei:listRelation[@xml:id='person_person']/tei:relation"):
+    person_person_rel_types.add(x.attrib["name"])
+    g += tei_relation_to_SRPC3_in_social_relation(
+        x,
+        domain="https://pmb.acdh.oeaw.ac.at/",
+        lookup_dict=lookup_dict,
+        verbose=True,
+    )
 
 save_path = os.path.join(rdf_dir, f"amp_{entity_type}.nt")
 print(f"saving graph as {save_path}")
