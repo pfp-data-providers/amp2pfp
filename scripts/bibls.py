@@ -15,7 +15,9 @@ from rdflib.namespace import RDF, RDFS
 TYPE_DOMAIN = "https://pfp-custom-types"
 
 g = Graph()
-g.parse("https://pfp-schema.acdh.oeaw.ac.at/types/person-work-publication/person-work-publication.ttl")
+g.parse(
+    "https://pfp-schema.acdh.oeaw.ac.at/types/person-work-publication/person-work-publication.ttl"
+)
 domain = "https://amp.acdh.oeaw.ac.at/"
 PU = Namespace(domain)
 
@@ -67,9 +69,8 @@ for x in tqdm(items, total=len(items)):
     authors = x.xpath("./tei:author[@ref]", namespaces=NSMAP)
     if authors:
         publication_event_uri = URIRef(f"{subj}/F30")
-        g.add(
-            (publication_event_uri, RDF.type, SARI_FRBROO["F30_Publication_Event"])
-        )
+        g.add((publication_event_uri, SARI_FRBROO["R24_created"], subj))
+        g.add((publication_event_uri, RDF.type, SARI_FRBROO["F30_Publication_Event"]))
         label = g.value(subj, RDFS.label)
         g.add(
             (
@@ -84,11 +85,29 @@ for x in tqdm(items, total=len(items)):
             author_label = extract_fulltext(x)
             author_uri = URIRef(f"{PU}{author_ref}")
             carried_out_uri = URIRef(f"{publication_event_uri}/PC14/{author_ref}")
+            g.add((publication_event_uri, CIDOC["P01i_is_domain_of"], carried_out_uri))
+            g.add((carried_out_uri, CIDOC["P01_is_domain_of"], publication_event_uri))
             g.add((carried_out_uri, RDF.type, CIDOC["PC14_carried_out_by"]))
             g.add((carried_out_uri, CIDOC["P02_has_range"], author_uri))
             g.add((carried_out_uri, CIDOC["P14.1_in_the_role_of"], author_type))
-            g.add((carried_out_uri, RDFS.label, Literal(f"{author_label} -> {author_type_label} -> {label}")))
+            g.add(
+                (
+                    carried_out_uri,
+                    RDFS.label,
+                    Literal(f"{author_label} -> {author_type_label} -> {label}"),
+                )
+            )
 
+g.add(
+    (
+        URIRef(
+            "https://pfp-schema.acdh.oeaw.ac.at/types/person-work-publication/#Creator"
+        ),
+        RDF.type,
+        URIRef("http://www.cidoc-crm.org/cidoc-crm/E55_Type"),
+    )
+)
 save_path = os.path.join(rdf_dir, f"amp_{entity_type}.nt")
 print(f"saving graph as {save_path}")
 g.serialize(save_path, format="nt", encoding="utf-8")
+g.serialize("bibl.ttl", format="ttl")

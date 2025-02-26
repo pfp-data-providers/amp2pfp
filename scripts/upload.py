@@ -1,7 +1,7 @@
 import glob
 import os
 
-from utils import upload_files_to_owncloud
+from csae_pyutils import upload_files_to_owncloud
 
 user = os.environ["OWNCLOUD_USER"]
 pw = os.environ["OWNCLOUD_PW"]
