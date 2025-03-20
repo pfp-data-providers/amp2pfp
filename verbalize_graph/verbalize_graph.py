@@ -130,7 +130,10 @@ with open(os.path.join(output_folder, f"{out_file}.json"), "w", encoding="utf-8"
     )
 
 # Create triples with labels
+seen_uris = set()  # Track URIs we've already seen
 with open(os.path.join(output_folder, f"{out_file}.txt"), "w", encoding="utf-8") as f:
+    current_subject = None
+    current_predicate = None
     for s, p, o in g:
         s_str = str(s)
         p_str = str(p)
@@ -145,16 +148,30 @@ with open(os.path.join(output_folder, f"{out_file}.txt"), "w", encoding="utf-8")
             else:
                 s_label = subjects[s_str]["label"][0]["label"]
 
+        # Write subject URI info when subject changes and hasn't been seen before
+        if s_str not in seen_uris:
+            seen_uris.add(s_str)
+            f.write(f"Die Graph-URI für {s_label} ist {s_str}.\n")
+            current_subject = s_str
+
         # Get predicate label (prefer German)
         p_label = str(p)
         if p == RDF.type:
             p_label = "is a"
+        elif p == RDFS.label:
+            p_label = "hat als Label"
         elif p_str in predicates and predicates[p_str]["label"]:
             de_labels = [label_item for label_item in predicates[p_str]["label"] if label_item["lang"] == "de"]
             if de_labels:
                 p_label = de_labels[0]["label"]
             else:
                 p_label = predicates[p_str]["label"][0]["label"]
+
+        # Write predicate URI info when predicate changes and hasn't been seen before
+        if p_str not in seen_uris:
+            seen_uris.add(p_str)
+            f.write(f"Die Graph-URI für {p_label} ist {p_str}.\n")
+            current_predicate = p_str
 
         # Get object label (prefer German)
         o_label = "no label"
