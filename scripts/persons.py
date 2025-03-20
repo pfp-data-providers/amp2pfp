@@ -130,7 +130,7 @@ for x in doc.any_xpath(".//tei:listRelation[@xml:id='person_person']/tei:relatio
     person_person_rel_types.add(x.attrib["name"])
     g += tei_relation_to_SRPC3_in_social_relation(
         x,
-        domain="https://pmb.acdh.oeaw.ac.at/",
+        domain=domain,
         lookup_dict=lookup_dict,
         verbose=True,
     )
