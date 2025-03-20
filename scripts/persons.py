@@ -8,7 +8,7 @@ from acdh_cidoc_pyutils import (
     make_affiliations,
     make_entity_label,
     make_occupations,
-    tei_relation_to_SRPC3_in_social_relation
+    tei_relation_to_SRPC3_in_social_relation,
 )
 from acdh_xml_pyutils.xml import NSMAP
 from acdh_cidoc_pyutils.namespaces import CIDOC
