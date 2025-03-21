@@ -119,6 +119,7 @@ for o in set(g.objects()):
 g.serialize(
     os.path.join(output_folder, f"{out_file}.nt"), format="nt", encoding="utf-8"
 )
+g.serialize(os.path.join(output_folder, f"{out_file}.ttl"))
 
 # Save all dictionaries to JSON
 with open(os.path.join(output_folder, f"{out_file}.json"), "w", encoding="utf-8") as fp:

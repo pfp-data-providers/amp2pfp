@@ -1,0 +1,263 @@
+@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pfpt: <https://pfp-schema.acdh.oeaw.ac.at/types/person-person/#> .
+
+<https://pfp-schema.acdh.oeaw.ac.at/types/person-person> a owl:Ontology ;
+    dc:title "PFP cidoc:E55_Type definitions for Person Person relations" .
+
+# person relations
+
+pfpt:In-relation-to a owl:Class ; # needed to be picked up by pylobid
+    rdfs:subClassOf crm:E55_Type ;
+    rdfs:label "in Bezug zu"@de ;
+    rdfs:label "in relation to"@en ;
+    rdfs:comment "A general relation between two persons."@en .
+
+pfpt:Friendship a owl:Class ;
+    rdfs:subClassOf pfpt:In-relation-to ;
+    rdfs:label "Freundschaft"@de ;
+    rdfs:label "friendship"@en ;
+    rdfs:comment "A friendly relationship between two persons."@en .
+
+pfpt:Is-partner-of a owl:Class ;
+    rdfs:subClassOf pfpt:In-relation-to ;
+    rdfs:label "ist Partner/Partnerin von"@de ;
+    rdfs:label "is partner of"@en ;
+    rdfs:comment "A relationship where one person is the partner of another."@en .
+
+pfpt:Intimate-relation a owl:Class ;
+    rdfs:subClassOf pfpt:In-relation-to ;
+    rdfs:label "in intimer Beziehung zu"@de ;
+    rdfs:label "in intimate relation to"@en ;
+    rdfs:comment "An intimate relationship between two persons."@en .
+
+pfpt:Hostile-relation a owl:Class ;
+    rdfs:subClassOf pfpt:In-relation-to ;
+    rdfs:label "in feindschaftlicher Beziehung"@de ;
+    rdfs:label "in hostile relation"@en ;
+    rdfs:comment "A hostile relationship between two persons."@en .
+
+## family relations
+
+pfpt:Family-relation a owl:Class ;
+    rdfs:subClassOf pfpt:In-relation-to ;
+    rdfs:label "Familienbeziehung"@de ;
+    rdfs:label "family relation"@en ;
+    rdfs:comment "A family relationship between two persons."@en .
+
+pfpt:Is-married-to a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist verheiratet mit"@de ;
+    rdfs:label "is married to"@en ;
+    rdfs:comment "A relationship where two persons are married."@en .   
+
+pfpt:Is-engaged-to a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist verlobt mit"@de ;
+    rdfs:label "is engaged to"@en ;
+    rdfs:comment "A relationship where two persons are engaged to be married."@en .
+
+pfpt:Is-related-by-marriage-to a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist verschwägert"@de ;
+    rdfs:label "is related by marriage to"@en ;
+    rdfs:comment "A relationship where two persons are related by marriage."@en .
+
+pfpt:Is-parent-in-law-of a owl:Class ;
+    rdfs:subClassOf pfpt:Is-related-by-marriage-to ;
+    rdfs:label "ist Schwiegerelternteil von"@de ;
+    rdfs:label "is parent-in-law of"@en ;
+    rdfs:comment "A parent-in-law relationship where one person is the parent-in-law of another."@en .
+
+pfpt:Is-child-in-law-of a owl:Class ;
+    rdfs:subClassOf pfpt:Is-related-by-marriage-to ;
+    rdfs:label "ist Schwiegerkind von"@de ;
+    rdfs:label "is child-in-law of"@en ;
+    rdfs:comment "A child-in-law relationship where one person is the child-in-law of another."@en .
+
+pfpt:Is-guardian-of a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist Vormund von"@de ;
+    rdfs:label "is guardian of"@en ;
+    rdfs:comment "A relationship where one person is the guardian of another."@en .
+
+pfpt:Is-sibling-of a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist Geschwister von"@de ;
+    rdfs:label "is sibling of"@en ;
+    rdfs:comment "A sibling relationship between two persons."@en .
+
+pfpt:Is-step-sibling-of a owl:Class ;
+    rdfs:subClassOf pfpt:Is-sibling-of ;
+    rdfs:label "ist Stiefgeschwister von"@de ;
+    rdfs:label "is step-sibling of"@en ;
+    rdfs:comment "A step-sibling relationship between two persons."@en .
+
+pfpt:Is-child-of a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist Kind von"@de ;
+    rdfs:label "is child of"@en ;
+    rdfs:comment "A child relationship where one person is the child of another."@en .
+
+pfpt:Is-biological-child-of a owl:Class ;
+    rdfs:subClassOf pfpt:Is-child-of ;
+    rdfs:label "ist biologisches Kind von"@de ;
+    rdfs:label "is biological child of"@en ;
+    rdfs:comment "A biological child relationship where one person is the biological child of another."@en .
+
+pfpt:Is-stepchild-of a owl:Class ;
+    rdfs:label "ist Stiefkind von"@de ;
+    rdfs:label "is stepchild of"@en ;
+    rdfs:comment "A stepchild relationship where one person is the stepchild of another."@en .
+
+pfpt:Is-parent-of a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist Elternteil von"@de ;
+    rdfs:label "is parent of"@en ;
+    rdfs:comment "A parent relationship where one person is the parent of another."@en .
+
+pfpt:Is-stepparent-of a owl:Class ;
+    rdfs:subClassOf pfpt:Is-parent-of ;
+    rdfs:label "ist Stiefelternteil von"@de ;
+    rdfs:label "is stepparent of"@en ;
+    rdfs:comment "A stepparent relationship where one person is the stepparent of another."@en .
+
+pfpt:Is-adopted-parent-of a owl:Class ;
+    rdfs:subClassOf pfpt:Is-parent-of ;
+    rdfs:label "ist Adoptivelternteil von"@de ;
+    rdfs:label "is adopted parent of"@en ;
+    rdfs:comment "An adopted parent relationship where one person is the adopted parent of another."@en .
+
+pfpt:Is-adopted-child-of a owl:Class ;
+    rdfs:subClassOf pfpt:Is-child-of ;
+    rdfs:label "ist Adoptivkind von"@de ;
+    rdfs:label "is adopted child of"@en ;
+    rdfs:comment "An adopted child relationship where one person is the adopted child of another."@en . 
+
+pfpt:Is-biological-parent-of a owl:Class ;
+    rdfs:subClassOf pfpt:Is-parent-of ;
+    rdfs:label "ist biologisches Elternteil von"@de ;
+    rdfs:label "is biological parent of"@en ;
+    rdfs:comment "A biological parent relationship where one person is the biological parent of another."@en .
+
+pfpt:Is-grandparent-of a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist Großelternteil von"@de ;
+    rdfs:label "is grandparent of"@en ;
+    rdfs:comment "A grandparent relationship where one person is the grandparent of another."@en .
+
+pfpt:Is-grandchild-of a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist Enkel/Enkelin von"@de ;
+    rdfs:label "is grandchild of"@en ;
+    rdfs:comment "A grandchild relationship where one person is the grandchild of another."@en .
+
+pfpt:Is-cousin-of a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist Cousin/Cousine von"@de ;
+    rdfs:label "is cousin of"@en ;
+    rdfs:comment "A cousin relationship between two persons."@en .
+
+pfpt:Is-nephew-niece-of a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist Neffe/Nichte von"@de ;
+    rdfs:label "is nephew/niece of"@en ;
+    rdfs:comment "A nephew/niece relationship where one person is the nephew/niece of another."@en .
+
+pfpt:Is-uncle-aunt-of a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist Onkel/Tante von"@de ;
+    rdfs:label "is uncle/aunt of"@en ;
+    rdfs:comment "An uncle/aunt relationship where one person is the uncle/aunt of another."@en .
+
+pfpt:Is-great-uncle-aunt-of a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist Großonkel/Großtante von"@de ;
+    rdfs:label "is great-uncle/aunt of"@en ;
+    rdfs:comment "A great-uncle/aunt relationship where one person is the great-uncle/aunt of another."@en .
+
+pfpt:Is-great-nephew-niece-of a owl:Class ;
+    rdfs:subClassOf pfpt:Family-relation ;
+    rdfs:label "ist Großneffe/Großnichte von"@de ;
+    rdfs:label "is great-nephew/niece of"@en ;
+    rdfs:comment "A great-nephew/niece relationship where one person is the great-nephew/niece of another."@en .
+
+## work relations
+
+pfpt:In-professional-relation-to a owl:Class ;
+    rdfs:subClassOf pfpt:In-relation-to ;
+    rdfs:label "in beruflichem Bezug zu"@de ;
+    rdfs:label "in professional relation to"@en ;
+    rdfs:comment "A professional relationship between two persons."@en .
+
+pfpt:Is-employer-of a owl:Class ;
+    rdfs:subClassOf pfpt:In-professional-relation-to ;
+    rdfs:label "ist Arbeitgeber/Arbeitgeberin für"@de ;
+    rdfs:label "is employer of"@en ;
+    rdfs:comment "A relationship where one person is the employer of another."@en .
+
+pfpt:Works-for a owl:Class ;
+    rdfs:subClassOf pfpt:In-professional-relation-to ;
+    rdfs:label "arbeitet für"@de ;
+    rdfs:label "works for"@en ;
+    rdfs:comment "A relationship where one person works for another."@en .
+
+pfpt:Works-together-with a owl:Class ;
+    rdfs:subClassOf pfpt:In-professional-relation-to ;
+    rdfs:label "arbeitet zusammen mit"@de ;
+    rdfs:label "works together with"@en ;
+    rdfs:comment "A relationship where two persons work together."@en .
+
+## teaching relations
+
+pfpt:In-study-relation-to a owl:Class ;
+    rdfs:subClassOf pfpt:In-relation-to ;
+    rdfs:label "in Studienbeziehung zu"@de ;
+    rdfs:label "in study relation to"@en ;
+    rdfs:comment "A study relationship between two persons."@en .
+
+pfpt:Studies-together-with a owl:Class ;
+    rdfs:subClassOf pfpt:In-study-relation-to ;
+    rdfs:label "studiert gemeinsam"@de ;
+    rdfs:label "studies together with"@en ;
+    rdfs:comment "A relationship where two persons study together."@en .
+
+pfpt:Is-student-of a owl:Class ;
+    rdfs:subClassOf pfpt:In-study-relation-to ;
+    rdfs:label "ist Schüler/Schülerin von"@de ;
+    rdfs:label "is student of"@en ;
+    rdfs:comment "A relationship where one person is the student of another."@en .
+
+pfpt:Is-teacher-of a owl:Class ;
+    rdfs:subClassOf pfpt:In-study-relation-to ;
+    rdfs:label "ist Lehrer/Lehrerin von"@de ;
+    rdfs:label "is teacher of"@en ;
+    rdfs:comment "A relationship where one person is the teacher of another."@en .
+
+# separated
+
+pfpt:Is-separated-from a owl:Class ;
+    rdfs:subClassOf pfpt:In-relation-to ;
+    rdfs:label "ist getrennt von"@de ;
+    rdfs:label "is separated from"@en ;
+    rdfs:comment "A relationship where two persons are separated."@en .
+
+pfpt:Leaves-by-death a owl:Class ;
+    rdfs:subClassOf pfpt:Is-separated-from ;
+    rdfs:label "hinterlässt durch Tod"@de ;
+    rdfs:label "leaves by death"@en ;
+    rdfs:comment "A relationship where one person leaves another by death."@en .
+
+pfpt:Is-separated-by-death-from a owl:Class ;
+    rdfs:subClassOf pfpt:Is-separated-from ;
+    rdfs:label "ist durch Tod getrennt von"@de ;
+    rdfs:label "is separated by death from"@en ;
+    rdfs:comment "A relationship where two persons are separated by death."@en .
+
+pfpt:Is-divorced-from a owl:Class ;
+    rdfs:subClassOf pfpt:Is-separated-from ;
+    rdfs:label "ist geschieden von"@de ;
+    rdfs:label "is divorced from"@en ;
+    rdfs:comment "A relationship where two persons are divorced."@en .
