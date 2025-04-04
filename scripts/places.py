@@ -1,37 +1,20 @@
 import os
 import requests
-from lxml.etree import Element
 from tqdm import tqdm
 from acdh_cidoc_pyutils import (
     make_e42_identifiers,
     make_appellations,
     coordinates_to_p168,
+    p89_falls_within
 )
 from acdh_cidoc_pyutils.namespaces import CIDOC
 from acdh_tei_pyutils.tei import TeiReader
 from acdh_tei_pyutils.utils import get_xmlid
-from acdh_xml_pyutils.xml import NSMAP
 from rdflib import Graph, Namespace, URIRef
 from rdflib.namespace import RDF
 
 
 BASE_URL = "https://raw.githubusercontent.com/Auden-Musulin-Papers/amp-entities/refs/heads/main/out/"  # noqa
-
-
-def p89_falls_within(
-    subj: URIRef,
-    node: Element,
-    domain: URIRef,
-    location_id_xpath="./tei:location[@type='located_in_place']/tei:placeName/@key",
-) -> Graph:
-    g = Graph()
-    try:
-        range_id = node.xpath(location_id_xpath, namespaces=NSMAP)[0]
-    except IndexError:
-        return g
-    range_uri = URIRef(f"{domain}{range_id}")
-    g.add((subj, CIDOC["P89_falls_within"], range_uri))
-    return g
 
 
 g = Graph()
@@ -86,7 +69,7 @@ for x in tqdm(items, total=len(items)):
     )
 
     # coordinates
-    g += coordinates_to_p168(subj, x)
+    g += coordinates_to_p168(subj, x, verbose=True)
 
     # falls within
     g += p89_falls_within(subj, x, f"{PU}")

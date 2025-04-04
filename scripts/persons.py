@@ -121,9 +121,9 @@ for x in tqdm(items, total=len(items)):
 
 print("now serializing person-person-relations")
 lookup_dict = requests.get(
-    "https://acdh-oeaw.github.io/pfp-schema/mappings/person-person.json"
+    "https://pfp-schema.acdh.oeaw.ac.at/mappings/person-person.json"
 ).json()
-g.parse("https://acdh-oeaw.github.io/pfp-schema/types/person-person/person-person.ttl")
+g.parse("https://pfp-schema.acdh.oeaw.ac.at/types/person-person/person-person.ttl")
 
 person_person_rel_types = set()
 for x in doc.any_xpath(".//tei:listRelation[@xml:id='person_person']/tei:relation"):
