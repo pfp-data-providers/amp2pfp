@@ -24,17 +24,16 @@ wheels = [
 
 [[package]]
 name = "acdh-cidoc-pyutils"
-version = "1.11"
+version = "1.12"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "acdh-arche-assets" },
     { name = "acdh-tei-pyutils" },
-    { name = "python-slugify" },
     { name = "rdflib" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/86/6e/def84d1bb41f696d5c0c22caa360397c1baac09c68892b37a81172ebf8ab/acdh_cidoc_pyutils-1.11.tar.gz", hash = "sha256:6c6685c998b6428724f49375cdd6df12a004ddfc0fc7bdd4b0d262e53ef2dc61", size = 18554, upload-time = "2025-04-04T07:19:54.266Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f3/63/7695db4e42446941013da564adefd988570ec1fc2273392e705e7281bf41/acdh_cidoc_pyutils-1.12.tar.gz", hash = "sha256:abc9a1118155b17cec7d26070820c534cd7fbd85fabb5651cd78409925d0020a", size = 48776, upload-time = "2026-01-26T17:52:03.201Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d8/52/c3aa246cbcaf5c0a397929fee0938674fc863d473857b2bd212f51311b14/acdh_cidoc_pyutils-1.11-py3-none-any.whl", hash = "sha256:852c2b1122cf82853d0bb718ae22bc523349c97b972687517710dbad145e9ae5", size = 14691, upload-time = "2025-04-04T07:19:52.89Z" },
+    { url = "https://files.pythonhosted.org/packages/48/97/eb442391f9f67c6a378a1e3c0ebdf0f480e7be031e9a8ed269a560239b3f/acdh_cidoc_pyutils-1.12-py3-none-any.whl", hash = "sha256:464527aa518f70b1b3fe4fbff29cf39a065ec6a8bfd0c841def8569b034a25ec", size = 14545, upload-time = "2026-01-26T17:52:02.259Z" },
 ]
 
 [[package]]
@@ -89,7 +88,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "acdh-cidoc-pyutils", specifier = ">=1.11" },
+    { name = "acdh-cidoc-pyutils", specifier = ">=1.12" },
     { name = "csae-pyutils", specifier = ">=0.2" },
 ]
 

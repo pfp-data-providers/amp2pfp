@@ -5,6 +5,6 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "acdh-cidoc-pyutils>=1.11",
+    "acdh-cidoc-pyutils>=1.12",
     "csae-pyutils>=0.2",
 ]
