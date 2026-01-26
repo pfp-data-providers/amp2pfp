@@ -1,11 +1,11 @@
-name: Serialize AMP to PFP-CIDOC
+name: Serialize entity-data to PFP-CIDOC
 
 on:
   workflow_dispatch:
 
 jobs:
   download:
-    name: serialize AMP to PFP-CIDOC
+    name: serialize entity-data to PFP-CIDOC
     runs-on: ubuntu-latest
     env:
       OWNCLOUD_USER: ${{ secrets.OWNCLOUD_USER }}
@@ -13,17 +13,16 @@ jobs:
       OWNCLOUD_FOLDER: pfp-data
     steps:
       - name: Perform Checkout
-        uses: actions/checkout@v4
-      - name: Install Python Packages
-        run: |
-          pip install -r requirements.txt
+        uses: actions/checkout@v6
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v7 
       - name: dump the data
         run: ./scripts/build_graph.sh
       - name: validate
         run: ./scripts/validate.sh
       - name: upload artifact if validate fails
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: validation_report
           path: datasets/validation_report.txt
